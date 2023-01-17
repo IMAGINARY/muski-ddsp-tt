@@ -26,6 +26,33 @@ export default class MuskiDDSPTT {
     const audioBuffer = await this.audioContext.decodeAudioData(arrayBuffer);
     this.events.emit('status', 'Determining audio features...');
     this.audioFeatures = await this.spice.getAudioFeatures(audioBuffer);
+
+    function inspect(name, obj) {
+      const items = [name, typeof obj];
+      if (Array.isArray(obj) && obj.length > 0) {
+        items.push(`of ${typeof obj[0]}`);
+        if (typeof obj[0] === 'number') {
+          items.push(`between (${Math.min(...obj)} and ${Math.max(...obj)})`);
+        }
+      } else if (typeof obj === 'object') {
+        items.push(`with keys ${Object.keys(obj).join(', ')}`);
+      }
+
+      if (obj.length) {
+        items.push(`length: ${obj.length}`);
+      }
+      console.log(...items);
+    }
+
+    // Todo: Use the data below to create a visualization of the audio features.
+    // f0_hz is the frequency of audio in 32ms frames
+    // (actually, I think it's 16000/512 ms, but Magenta guys treat it as 32ms)
+    // inspect('f0_hz', this.audioFeatures.f0_hz);
+    // loudness_db is the loudness of audio
+    // (in 4ms frames?)
+    // inspect('loudness_db', this.audioFeatures.loudness_db);
+    // inspect('confidences', this.audioFeatures.confidences);
+    // window.features = this.audioFeatures;
     this.events.emit('status', 'Done.');
   }
 

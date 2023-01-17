@@ -1,0 +1,41 @@
+{
+  "plugins": [],
+  "extends": ["airbnb"],
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module",
+    "ecmaFeatures": {
+    }
+  },
+  "env": {
+    "browser": true,
+    "es6": true,
+    "jquery": true
+  },
+  "globals": {
+    "d3": true,
+    "updateMap": true,
+    "clearGeodesic": true,
+    "clearLoxodrome": true,
+    "clearEllipses": true,
+    "undoCommand": true,
+    "projection": true,
+    "rotateToCurrentLocation": true,
+    "sampleEllipses": true
+  },
+  "rules": {
+    "no-console": ["error", { "allow": ["warn", "error"] }],
+    "comma-dangle": ["error", {
+      "arrays": "always-multiline",
+      "objects": "always-multiline",
+      "imports": "always-multiline",
+      "exports": "always-multiline",
+      "functions": "never"
+    }]
+  },
+  "settings": {
+    "polyfills": [
+      "fetch"
+    ]
+  }
+}
