@@ -1,0 +1,117 @@
+.muski-ddsp-tt {
+  border: 8px solid black;
+  padding: 1em;
+  max-width: 600px;
+}
+.muski-ddsp-tt audio {
+  margin: auto;
+}
+
+.btn.muski-ddsp-tt-tone {
+  width: 80px;
+  height: 80px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 75%;
+  border-radius: 50%;
+  font-size: 0;
+  background-color: #efefef;
+}
+
+.muski-ddsp-tt-tone-flute {
+  background-image: url(204b75f27dc4222a0f21.svg);
+}
+.muski-ddsp-tt-tone-flute:hover {
+  background-color: #d8a9ff !important;
+}
+
+.muski-ddsp-tt-tone-violin {
+  background-image: url(af293ee4f0df6dcbbde5.svg);
+}
+.muski-ddsp-tt-tone-violin:hover {
+  background-color: #ffda80 !important;
+}
+
+.muski-ddsp-tt-tone-trumpet {
+  background-image: url(69541350a6573f0bf3aa.svg);
+}
+.muski-ddsp-tt-tone-trumpet:hover {
+  background-color: #97ff94 !important;
+}
+
+.muski-ddsp-tt-tone-tenor_saxophone {
+  background-image: url(14c755b102fbb26656dd.svg);
+}
+.muski-ddsp-tt-tone-tenor_saxophone:hover {
+  background-color: #fffe81 !important;
+}
+
+.record-pane {
+  display: flex;
+  align-items: center;
+}
+
+.btn-record-stop {
+  display: inline-block;
+  position: relative;
+  width: 60px;
+  height: 60px;
+  font-size: 0;
+  background-color: #efefef;
+  padding: 0;
+  border: none;
+}
+.btn-record-stop:hover {
+  background-color: #efefef !important;
+}
+.btn-record-stop::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: red;
+}
+.btn-record-stop.recording::before {
+  border-radius: 5px;
+  top: 16.5px;
+  left: 16.5px;
+  width: 27px;
+  height: 27px;
+}
+
+@keyframes progress-bar-grow {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+.record-progress-bar {
+  display: inline-block;
+  position: relative;
+  height: 26px;
+  width: auto;
+  background-color: #efefef;
+  vertical-align: middle;
+  flex-grow: 1;
+  margin-left: 10px;
+}
+.record-progress-bar .bar {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: #ffacd9;
+  width: 0;
+}
+.record-progress-bar.recording .bar {
+  animation: progress-bar-grow 15s linear;
+}
+
+/*# sourceMappingURL=default.52babf222a7bd805fc21.css.map*/

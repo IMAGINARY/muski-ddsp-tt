@@ -1,5 +1,15 @@
 @import 'mod_colors';
 
+.muski-ddsp-tt {
+  border: 8px solid black;
+  padding: 1em;
+  max-width: 600px;
+
+  audio {
+    margin: auto;
+  }
+}
+
 .btn.muski-ddsp-tt-tone {
   width: 80px;
   height: 80px;
@@ -39,6 +49,84 @@
   }
 }
 
-.btn-record-stop {
+.record-pane {
+  display: flex;
+  align-items: center;
+}
 
+$record-button-size: 60px;
+$record-dot-perc: 0.5;
+$record-stop-perc: 0.5 * 0.9;
+
+.btn-record-stop {
+  display: inline-block;
+  position: relative;
+  width: $record-button-size;
+  height: $record-button-size;
+  font-size: 0;
+  background-color: $c-gray-light;
+  padding: 0;
+  border: none;
+
+  &:hover {
+    background-color: $c-gray-light !important;
+  }
+
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: ($record-button-size - $record-button-size * $record-dot-perc) * 0.5;
+    left: ($record-button-size - $record-button-size * $record-dot-perc) * 0.5;
+    width: $record-button-size * $record-dot-perc;
+    height: $record-button-size * $record-dot-perc;
+    border-radius: 50%;
+    background-color: red;
+  }
+
+  &.recording {
+    &::before {
+      border-radius: 5px;
+      top: ($record-button-size - $record-button-size * $record-stop-perc) * 0.5;
+      left: ($record-button-size - $record-button-size * $record-stop-perc) * 0.5;
+      width: $record-button-size * $record-stop-perc;
+      height: $record-button-size * $record-stop-perc;
+    }
+  }
+}
+
+@keyframes progress-bar-grow {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+.record-progress-bar {
+  display: inline-block;
+  position: relative;
+  height: 26px;
+  width: auto;
+  background-color: $c-gray-light;
+  vertical-align: middle;
+  flex-grow: 1;
+  margin-left: 10px;
+
+  .bar {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background-color: $c-pink;
+    width: 0;
+  }
+
+  &.recording {
+    .bar {
+      animation: progress-bar-grow 15s linear;
+    }
+  }
 }

@@ -1,12 +1,17 @@
 import '../scss/muski-ddsp-tt.scss';
 import RecorderService from './lib/recorder-service';
 
+const MAX_RECORDING_LEN = 15000;
+
 export default class MusKiDDSPTTUI {
   constructor(ddsptt, options) {
     this.ddsptt = ddsptt;
     this.options = options;
+    this.isBusy = false;
+    this.isRecording = false;
     this.recorderService = null;
     this.lastRecording = null;
+    this.recordingTimeout = null;
 
     this.$element = $('<div></div>')
       .addClass('muski-ddsp-tt');
@@ -15,31 +20,28 @@ export default class MusKiDDSPTTUI {
       .addClass(['alert', 'alert-secondary', 'muski-toy-status'])
       .appendTo(this.$element);
 
-    this.$inputButtons = $('<div></div>')
-      .addClass(['btn-group', 'd-block', 'mb-3'])
+    this.$recordPane = $('<div></div>')
+      .addClass(['record-pane', 'mb-3'])
       .appendTo(this.$element);
 
     this.$recordButton = $('<button></button>')
       .attr('type', 'button')
-      .addClass(['btn', 'btn-primary', 'mb-3'])
+      .addClass(['btn', 'btn-record-stop'])
       .text('Record')
       .on('click', () => {
-        this.handleRecordButton();
+        this.handleRecordStopButton();
       })
-      .appendTo(this.$inputButtons);
+      .appendTo(this.$recordPane);
 
-    this.$stopButton = $('<button></button>')
-      .attr('type', 'button')
-      .addClass(['btn', 'btn-primary', 'mb-3'])
-      .text('Stop')
-      .on('click', () => {
-        this.handleStopButton();
-      })
-      .appendTo(this.$inputButtons);
+    this.$recordBar = $('<div></div>')
+      .addClass('record-progress-bar')
+      .append($('<div></div>')
+        .addClass('bar'))
+      .appendTo(this.$recordPane);
 
     this.$toneButtons = Object.keys(this.options.models).map((model) => (
       $('<button></button>')
-        .addClass(['btn', 'me-2', 'muski-ddsp-tt-tone', `muski-ddsp-tt-tone-${model}`])
+        .addClass(['btn', 'mx-2', 'mb-2', 'muski-ddsp-tt-tone', `muski-ddsp-tt-tone-${model}`])
         .attr('type', 'button')
         .on('click', () => {
           this.handleToneButton(model);
@@ -84,19 +86,48 @@ export default class MusKiDDSPTTUI {
     // await this.ddsptt.loadAudio('audio/plinplin.mp3');
   }
 
-  async handleRecordButton() {
-    await this.recorderService.startRecording();
-    this.setStatus('Recording...');
+  async handleRecordStopButton() {
+    if (!this.isBusy) {
+      this.isBusy = true;
+      if (!this.isRecording) {
+        this.startRecording();
+      } else {
+        this.stopRecording();
+      }
+      this.isBusy = false;
+    }
   }
 
-  async handleStopButton() {
-    this.recorderService.stopRecording();
+  async startRecording() {
+    if (!this.isRecording) {
+      this.isRecording = true;
+      this.$recordButton.addClass('recording');
+      this.$recordBar.addClass('recording');
+      this.recordingTimeout = setTimeout(() => {
+        this.stopRecording();
+      }, MAX_RECORDING_LEN);
+      await this.recorderService.startRecording();
+      this.setStatus('Recording...');
+    }
+  }
+
+  stopRecording() {
+    if (this.isRecording) {
+      this.recorderService.stopRecording();
+      this.$recordButton.removeClass('recording');
+      this.$recordBar.removeClass('recording');
+      this.isRecording = false;
+    }
   }
 
   async handleToneButton(model) {
-    this.$player.hide();
-    await this.ddsptt.toneTransfer(this.options.models[model]);
-    this.$player.show();
+    if (!this.isBusy) {
+      this.isBusy = true;
+      this.$player.hide();
+      await this.ddsptt.toneTransfer(this.options.models[model]);
+      this.$player.show();
+      this.isBusy = false;
+    }
   }
 
   onInitStart() {
