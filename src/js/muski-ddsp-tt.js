@@ -4,9 +4,9 @@ import { SPICE, DDSP } from '@magenta/music';
 import encodeWAV from './lib/encode-wav';
 
 export default class MuskiDDSPTT {
-  constructor(models) {
+  constructor(spiceCheckpointUrl) {
     this.events = new EventEmitter();
-    this.spice = new SPICE();
+    this.spice = new SPICE(spiceCheckpointUrl);
     this.audioContext = null;
   }
 
