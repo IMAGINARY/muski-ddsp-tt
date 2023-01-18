@@ -6,6 +6,7 @@
   max-width: 600px;
 
   audio {
+    display: block;
     margin: auto;
   }
 }
@@ -19,6 +20,13 @@
   border-radius: 50%;
   font-size: 0;
   background-color: $c-gray-light;
+  transition: background-size 0.5s, border-size 0.1s;
+
+  &.disabled {
+    border: 4px solid #dbd9d9;
+    background-size: 65%;
+    opacity: 0.3;
+  }
 }
 
 .muski-ddsp-tt-tone-flute {
@@ -49,9 +57,26 @@
   }
 }
 
+.audio-pane {
+  position: relative;
+  text-align: center;
+  .audio-spinner {
+    position: absolute;
+    top: 12px;
+    margin-left: -1rem;
+  }
+}
+
 .record-pane {
   display: flex;
   align-items: center;
+  position: relative;
+
+  .record-spinner {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+  }
 }
 
 $record-button-size: 60px;
@@ -91,6 +116,12 @@ $record-stop-perc: 0.5 * 0.9;
       left: ($record-button-size - $record-button-size * $record-stop-perc) * 0.5;
       width: $record-button-size * $record-stop-perc;
       height: $record-button-size * $record-stop-perc;
+    }
+  }
+
+  &.busy {
+    &::before {
+      opacity: 0.2;
     }
   }
 }
