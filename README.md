@@ -17,5 +17,10 @@ Based on the [DDSP Tone Transfer Magenta.js demo](https://magenta.github.io/mage
 which is licensed under the Apache License, Version 2.0.
 Copyright 2020 Google Inc.
 
+Emojis designed by OpenMoji – the open-source emoji and icon project. 
+License: [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/#)
+
+Flute emoji designed by IMAGINARY gGmbH. License: [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/#) 
+
 Adaptations by [Eric Londaits](mailto:eric.londaits@imaginary.org) for IMAGINARY gGmbH.
 Copyright 2022 IMAGINARY gGmbH.

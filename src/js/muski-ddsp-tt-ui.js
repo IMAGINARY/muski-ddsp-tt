@@ -11,15 +11,6 @@ export default class MusKiDDSPTTUI {
     this.$element = $('<div></div>')
       .addClass('muski-ddsp-tt');
 
-    this.$initButton = $('<button></button>')
-      .attr('type', 'button')
-      .addClass(['btn', 'btn-primary', 'mb-3'])
-      .text('Start')
-      .on('click', () => {
-        this.handleInitButton();
-      })
-      .appendTo(this.$element);
-
     this.$status = $('<div></div>')
       .addClass(['alert', 'alert-secondary', 'muski-toy-status'])
       .appendTo(this.$element);
@@ -48,7 +39,7 @@ export default class MusKiDDSPTTUI {
 
     this.$toneButtons = Object.keys(this.options.models).map((model) => (
       $('<button></button>')
-        .addClass(['btn', 'btn-secondary', 'mr-2'])
+        .addClass(['btn', 'me-2', 'muski-ddsp-tt-tone', `muski-ddsp-tt-tone-${model}`])
         .attr('type', 'button')
         .on('click', () => {
           this.handleToneButton(model);
@@ -57,7 +48,7 @@ export default class MusKiDDSPTTUI {
     ));
 
     this.$toneButtonPanel = $('<div></div>')
-      .addClass('btn-group mb-3')
+      .addClass('tone-buttons text-center mb-3')
       .append(this.$toneButtons)
       .appendTo(this.$element)
       .hide();
@@ -84,12 +75,11 @@ export default class MusKiDDSPTTUI {
     this.$status.text(message);
   }
 
-  async handleInitButton() {
+  async init() {
     this.recorderService = new RecorderService();
     this.recorderService.em.addEventListener('recording', (ev) => {
       this.onRecording(ev.detail.recording);
     });
-    this.$initButton.hide();
     await this.ddsptt.init();
     // await this.ddsptt.loadAudio('audio/plinplin.mp3');
   }

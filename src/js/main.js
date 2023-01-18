@@ -1,9 +1,8 @@
 import MuskiDDSPTT from './muski-ddsp-tt';
 import MusKiDDSPTTUI from './muski-ddsp-tt-ui';
 
-const ddsptt = new MuskiDDSPTT();
-
-$('[data-component=muski-ddsp-tt]').each((i, element) => {
+$('[data-component=muski-ddsp-tt]').first().each(async (i, element) => {
+  const ddsptt = new MuskiDDSPTT();
   const ui = new MusKiDDSPTTUI(ddsptt, {
     models: {
       trumpet: 'models/trumpet',
@@ -12,5 +11,6 @@ $('[data-component=muski-ddsp-tt]').each((i, element) => {
       tenor_saxophone: 'models/tenor_saxophone',
     },
   });
-  $(element).append(ui.$element);
+  await ui.init();
+  $(element).replaceWith(ui.$element);
 });

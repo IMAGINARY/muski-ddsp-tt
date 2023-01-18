@@ -1,0 +1,44 @@
+@import 'mod_colors';
+
+.btn.muski-ddsp-tt-tone {
+  width: 80px;
+  height: 80px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 75%;
+  border-radius: 50%;
+  font-size: 0;
+  background-color: $c-gray-light;
+}
+
+.muski-ddsp-tt-tone-flute {
+  background-image: url('../../vendor/openmoji/flute.svg');
+  &:hover {
+    background-color: $c-purple !important;
+  }
+}
+
+.muski-ddsp-tt-tone-violin {
+  background-image: url('../../vendor/openmoji/violin.svg');
+  &:hover {
+      background-color: $c-orange !important;
+  }
+}
+
+.muski-ddsp-tt-tone-trumpet {
+  background-image: url('../../vendor/openmoji/trumpet.svg');
+  &:hover {
+      background-color: $c-green !important;
+  }
+}
+
+.muski-ddsp-tt-tone-tenor_saxophone {
+  background-image: url('../../vendor/openmoji/saxophone.svg');
+  &:hover {
+      background-color: $c-yellow !important;
+  }
+}
+
+.btn-record-stop {
+
+}

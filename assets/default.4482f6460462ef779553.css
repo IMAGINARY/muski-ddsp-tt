@@ -1,0 +1,40 @@
+.btn.muski-ddsp-tt-tone {
+  width: 80px;
+  height: 80px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 75%;
+  border-radius: 50%;
+  font-size: 0;
+  background-color: #efefef;
+}
+
+.muski-ddsp-tt-tone-flute {
+  background-image: url(204b75f27dc4222a0f21.svg);
+}
+.muski-ddsp-tt-tone-flute:hover {
+  background-color: #d8a9ff !important;
+}
+
+.muski-ddsp-tt-tone-violin {
+  background-image: url(af293ee4f0df6dcbbde5.svg);
+}
+.muski-ddsp-tt-tone-violin:hover {
+  background-color: #ffda80 !important;
+}
+
+.muski-ddsp-tt-tone-trumpet {
+  background-image: url(69541350a6573f0bf3aa.svg);
+}
+.muski-ddsp-tt-tone-trumpet:hover {
+  background-color: #97ff94 !important;
+}
+
+.muski-ddsp-tt-tone-tenor_saxophone {
+  background-image: url(14c755b102fbb26656dd.svg);
+}
+.muski-ddsp-tt-tone-tenor_saxophone:hover {
+  background-color: #fffe81 !important;
+}
+
+/*# sourceMappingURL=default.4482f6460462ef779553.css.map*/
